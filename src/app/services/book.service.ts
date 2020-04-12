@@ -1,16 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Book } from '../book';
-import { BOOKS } from '../mock-books';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
-// register singleton bookService
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class BookService {
 
-  constructor() { }
+    private booksUrl = 'http://localhost:8080/books';
 
-  getBooks(): Book[] {
-    return BOOKS;
-  }
+    constructor(private http: HttpClient) { }
+
+    getBooks(): Observable<Book[]> {
+        return this.http.get<GetBooksResponse>(this.booksUrl).pipe(
+            map(response => response._embedded.bookList)
+        );
+    }
+}
+
+interface GetBooksResponse {
+    _embedded: {
+        bookList: Book[];
+        _links: {self: {href: string}};
+    };
 }

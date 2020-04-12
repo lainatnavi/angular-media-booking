@@ -7,4 +7,5 @@ export const BOOKS: Book[] = [
     {id: 4, title: 'Pizzicotta Granbiscotta', isbn: '888-000-111'},
     {id: 5, title: 'Pizzicotta Parmacotta', isbn: '888-000-111'},
     {id: 6, title: 'EvViva il Re Gatto', isbn: '888-000-111'},
+    {id: 7, title: 'Pizzicotta che carina', isbn: '888-000-111'},
 ];
