@@ -1,9 +1,44 @@
 <h2>I libri di Pizzicottina che carina</h2>
 <ul class="books">
-    <li *ngFor="let book of books">
-        <div><span>id: </span>{{book.id}}</div>
-        <div><span>title: </span>{{book.title}}</div>
-        <div><span>isbn: </span>{{book.isbn}}</div>
-        
-    </li>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>isbn</th>
+        </tr>
+        <tr *ngFor="let book of books">
+            <td>{{book.id}}</td>
+            <td>{{book.title}}</td>
+            <td>{{book.isbn}}</td>
+        </tr>
+    </table>
 </ul>
+<br>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="books">
+        <!-- No. Column -->
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+        </ng-container>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+        </ng-container>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="isbn">
+            <mat-header-cell *matHeaderCellDef> Isbn </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.isbn}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+
+</div>
